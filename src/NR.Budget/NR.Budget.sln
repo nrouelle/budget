@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NR.Budget.Import", "NR.Budget.Import\NR.Budget.Import.csproj", "{AEA31422-7738-425F-96F4-FCB35FF9EA25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NR.Budget.Import.Test", "NR.Budget.Import.Test\NR.Budget.Import.Test.csproj", "{2021C7B9-B1AD-431E-AB65-CBF50B1F01E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEA31422-7738-425F-96F4-FCB35FF9EA25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA31422-7738-425F-96F4-FCB35FF9EA25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA31422-7738-425F-96F4-FCB35FF9EA25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA31422-7738-425F-96F4-FCB35FF9EA25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2021C7B9-B1AD-431E-AB65-CBF50B1F01E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2021C7B9-B1AD-431E-AB65-CBF50B1F01E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2021C7B9-B1AD-431E-AB65-CBF50B1F01E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2021C7B9-B1AD-431E-AB65-CBF50B1F01E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
