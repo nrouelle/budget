@@ -1,3 +1,5 @@
+using NR.Budget.Import.Data;
+
 namespace NR.Budget.Import.Test;
 
 public class Tests
@@ -8,7 +10,7 @@ public class Tests
     }
 
     [Test]
-    public void ShouldImportASingleLineFromCSV()
+    public void ShouldImportASingleLineFromCsv()
     {
         var csvData = "2023-09-22;2023-09-22;\"CARTE 21/09/23 RESEAU MISTRAL CB*7767\";\"Non catégorisé\";\"Non catégorisé\";-10,00;;00040265284;PERSO;16310.55";
 
@@ -19,7 +21,7 @@ public class Tests
             new DateTime(2023, 9, 22), 
             "CARTE 21/09/23 RESEAU MISTRAL CB*7767", 
             -10.0m);
-        Assert.AreEqual(expectedData, savedData.First());
+        Assert.That(savedData.First(), Is.EqualTo(expectedData));
     }
     
     [Test]
@@ -34,15 +36,12 @@ public class Tests
         var bankingService = new BankingService(context);
         bankingService.SaveBankingData(savedData);
 
-        Assert.AreEqual(1, context.Lines.Count);
+        Assert.That(context.Lines.Count, Is.EqualTo(1));
     }
     
     [Test]
     public void ShouldSaveMultipleLineInContextWhenImportFile()
     {
-        // je passe des données CSV
-        // var csvData = "2023-09-22;2023-09-22;\"CARTE 21/09/23 RESEAU MISTRAL CB*7767\";\"Non catégorisé\";\"Non catégorisé\";-10,00;;00040265284;PERSO;16310.55\n2023-09-22;2023-09-22;\"CARTE 21/09/23 NEWREST WAGONS LI CB*7767\";\"Restaurants, bars, discothèques…\";Loisirs;-7,98;;00040265284;PERSO;16310.55\n2023-09-22;;\"E LECLERC TAMARI LA SEYNE SUR FR\";\"Autorisation paiement / retrait en cours\";\"Non catégorisé\";-4,94;;00040265284;PERSO;\n2023-09-21;2023-09-21;\"VIR SEPA HARMONIE MUTUELLE\";\"Remboursements frais de santé\";Santé;7,50;;00040265284;PERSO;16328.53\n2023-09-21;2023-09-21;\"VIR SEPA CPAM RHONE\";\"Remboursements frais de santé\";Santé;17,50;;00040265284;PERSO;16328.53\n";
-        // je lance l'import
         var context = new InMemoryContext();
         var importService = new ImportService();
         var fileData = File.ReadLines("./files/multiple_lines.txt").ToList();
@@ -50,7 +49,21 @@ public class Tests
         var bankingService = new BankingService(context);
         bankingService.SaveBankingData(savedData);
 
-        Assert.AreEqual(5, context.Lines.Count);
+        Assert.That(context.Lines.Count, Is.EqualTo(5));
     }
     
+    [Test]
+    public void ShouldSaveImportedDataToJson()
+    {
+        var context = new JsonContext();
+        var importService = new ImportService();
+        var fileData = File.ReadLines("./files/multiple_lines.txt").ToList();
+        var savedData = importService.MapFile(fileData);
+        var bankingService = new BankingService(context);
+        bankingService.SaveBankingData(savedData);
+
+        Assert.IsTrue(File.Exists("./accounts.json"));
+        // Assert.AreEqual(5, context.Lines.Count);
+        // a file is created 
+    }
 }
