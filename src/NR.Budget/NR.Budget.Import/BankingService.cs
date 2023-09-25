@@ -12,6 +12,7 @@
             var budgetLine = new BudgetLine(data.DateOperation.Date, data.Description, data.Amount);
             _context.Lines.Add(budgetLine);
         }
+        _context.Save(_context.Lines);
         return true;
     }
 }
