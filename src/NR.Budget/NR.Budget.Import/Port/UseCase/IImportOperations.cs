@@ -1,4 +1,6 @@
-﻿namespace NR.Budget.Import.Port.UseCase;
+﻿using NR.Budget.Import.Domain.Entities;
+
+namespace NR.Budget.Import.Port.UseCase;
 
 public interface IImportOperations
 {

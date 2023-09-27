@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
+using NR.Budget.Import.Domain.Entities;
 
-namespace NR.Budget.Import.Data;
+namespace NR.Budget.Import.Infrastructure;
 
 public class JsonContext : IDataContext
 {

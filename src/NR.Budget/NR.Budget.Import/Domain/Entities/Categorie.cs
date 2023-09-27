@@ -1,4 +1,6 @@
-﻿public class Categorie : IEquatable<Categorie>
+﻿namespace NR.Budget.Import.Domain.Entities;
+
+public class Categorie : IEquatable<Categorie>
 {
     public string Libelle { get; set; }
 

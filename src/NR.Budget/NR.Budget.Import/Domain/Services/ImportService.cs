@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using NR.Budget.Import.Domain.Entities;
 
-namespace NR.Budget.Import;
+namespace NR.Budget.Import.Domain.Services;
 
 public class ImportService
 {

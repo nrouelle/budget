@@ -1,4 +1,6 @@
-﻿namespace NR.Budget.Import.Data;
+﻿using NR.Budget.Import.Domain.Entities;
+
+namespace NR.Budget.Import.Infrastructure;
 
 public class InMemoryContext : IDataContext
 {

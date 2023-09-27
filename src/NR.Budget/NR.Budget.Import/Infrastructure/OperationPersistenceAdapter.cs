@@ -1,4 +1,5 @@
-﻿using NR.Budget.Import.Port.Output;
+﻿using NR.Budget.Import.Domain.Entities;
+using NR.Budget.Import.Port.Output;
 
 namespace NR.Budget.Import.Infrastructure;
 

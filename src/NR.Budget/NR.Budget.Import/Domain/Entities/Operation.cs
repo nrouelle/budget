@@ -1,4 +1,6 @@
-﻿public abstract class Operation : IEquatable<Operation>
+﻿namespace NR.Budget.Import.Domain.Entities;
+
+public abstract class Operation : IEquatable<Operation>
 {
     public DateTime DateOperation { get; private set; }
     public string Description { get; private set; }

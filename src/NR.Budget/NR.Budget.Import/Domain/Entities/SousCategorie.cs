@@ -1,4 +1,6 @@
-﻿public class SousCategorie: IEquatable<SousCategorie>
+﻿namespace NR.Budget.Import.Domain.Entities;
+
+public class SousCategorie: IEquatable<SousCategorie>
 {
     public string Libelle { get; set; }
     public Categorie Categorie { get; set; } = new Categorie();
