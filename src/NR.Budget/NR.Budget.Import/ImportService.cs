@@ -1,17 +1,18 @@
 ﻿using System.Text.RegularExpressions;
+using NR.Budget.Import.Domain.Entities;
 
 namespace NR.Budget.Import;
 
 public class ImportService
 {
-    public List<Operation> MapFile(List<string> csvLines, bool headers = true)
+    public List<Operation?> MapFile(List<string> csvLines, bool headers = true)
     {
         // Remove headers
-        if(headers)
+        if (headers)
             csvLines.RemoveAt(0);
 
-        var operations = new List<Operation>();
-        
+        var operations = new List<Operation?>();
+
         foreach (var line in csvLines)
         {
             operations.Add(ParseOperation(line));
@@ -20,14 +21,17 @@ public class ImportService
         return operations;
     }
 
-    private Operation ParseOperation(string line)
+    private Operation? ParseOperation(string line)
     {
         var parsedOperation = line.Split(';');
-        var operation = new Operation(
-            DateTime.Parse(parsedOperation[0]), 
-            CleanDescription(parsedOperation[2]), 
-            decimal.Parse(parsedOperation[5]));
-        return operation;
+        var operationDate = DateTime.Parse(parsedOperation[0]);
+        var amount = Math.Abs(float.Parse(parsedOperation[5]));
+        return amount switch
+        {
+            > 0 => new Revenu(operationDate, CleanDescription(parsedOperation[2]), amount),
+            < 0 => new Depense(operationDate, CleanDescription(parsedOperation[2]), amount),
+            _ => null
+        };
     }
 
     private string CleanDescription(string description)
@@ -38,6 +42,6 @@ public class ImportService
         description = Regex.Replace(description, cartePattern, string.Empty);
         description = Regex.Replace(description, cbPattern, string.Empty);
         description = Regex.Replace(description, virementSepaPattern, string.Empty);
-        return description.Replace('"',' ').Trim();
+        return description.Replace('"', ' ').Trim();
     }
 }

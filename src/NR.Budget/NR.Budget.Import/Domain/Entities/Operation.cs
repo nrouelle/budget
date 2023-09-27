@@ -1,12 +1,14 @@
-﻿public class Operation : IEquatable<Operation>
+﻿public abstract class Operation : IEquatable<Operation>
 {
     public DateTime DateOperation { get; private set; }
     public string Description { get; private set; }
-    public decimal Amount { get; private set; }
+    public float Amount { get; private set; }
     public Categorie Categorie { get; private set; }
     public SousCategorie SousCategorie { get; private set; }
+    
+    public OperationType OperationType { get; protected set; }
 
-    public Operation(DateTime dateOperation, string description, decimal amount)
+    public Operation(DateTime dateOperation, string description, float amount)
     {
         DateOperation = dateOperation;
         Description = description;

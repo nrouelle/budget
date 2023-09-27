@@ -10,7 +10,7 @@ public class OperationPersistenceAdapter : ISaveOperationsPort
     {
         _dataContext = dataContext;
     }
-    public IEnumerable<Operation> Save(List<Operation> operations)
+    public IEnumerable<Operation?> Save(List<Operation?> operations)
     { 
         _dataContext.Operations.AddRange(operations);
         _dataContext.SaveChanges();

@@ -2,5 +2,5 @@
 
 public interface ISaveOperationsPort
 {
-    IEnumerable<Operation> Save(List<Operation> operations);
+    IEnumerable<Operation?> Save(List<Operation?> operations);
 }

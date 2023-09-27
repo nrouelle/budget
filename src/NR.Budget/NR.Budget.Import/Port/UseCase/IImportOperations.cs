@@ -2,5 +2,5 @@
 
 public interface IImportOperations
 {
-    IEnumerable<Operation> ImportOperations(List<Operation> operations);
+    IEnumerable<Operation?> ImportOperations(List<Operation?> operations);
 }

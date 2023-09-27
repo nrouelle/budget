@@ -1,4 +1,5 @@
 using NR.Budget.Import.Data;
+using NR.Budget.Import.Domain.Entities;
 using NR.Budget.Import.Infrastructure;
 using NUnit.Framework.Constraints;
 
@@ -21,10 +22,10 @@ public class Tests
         var importService = new ImportService();
         var savedData = importService.MapFile(new List<string>() {csvData}, false);
 
-        var expectedData = new Operation(
+        var expectedData = new Depense(
             new DateTime(2023, 9, 22), 
             "RESEAU MISTRAL", 
-            -10.0m);
+            10.0f);
         Assert.That(savedData.First(), Is.EqualTo(expectedData));
     }
     

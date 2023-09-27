@@ -11,7 +11,7 @@ public class OperationService : IImportOperations
     {
         _saveOperationsPort = saveOperationsPort;
     }
-    public IEnumerable<Operation> ImportOperations(List<Operation> operations)
+    public IEnumerable<Operation?> ImportOperations(List<Operation?> operations)
     {
         return _saveOperationsPort.Save(operations);
     }
