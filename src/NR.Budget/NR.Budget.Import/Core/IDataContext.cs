@@ -1,5 +1,5 @@
 ﻿public interface IDataContext
 {
-    List<BudgetLine> Lines { get; set; }
-    void Save(List<BudgetLine> lines);
+    List<Operation> Operations { get; set; }
+    void Save(List<Operation> lines);
 }

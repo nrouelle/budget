@@ -17,7 +17,7 @@ public class Tests
         var importService = new ImportService();
         var savedData = importService.MapFile(new List<string>() {csvData}, false);
 
-        var expectedData = new BudgetLine(
+        var expectedData = new Operation(
             new DateTime(2023, 9, 22), 
             "CARTE 21/09/23 RESEAU MISTRAL CB*7767", 
             -10.0m);
@@ -25,7 +25,7 @@ public class Tests
     }
     
     [Test]
-    public void ShouldSaveLineInContext()
+    public void ShouldSaveOperationInContext()
     {
         var csvData = "2023-09-22;2023-09-22;\"CARTE 21/09/23 RESEAU MISTRAL CB*7767\";\"Non catégorisé\";\"Non catégorisé\";-10,00;;00040265284;PERSO;16310.55";
 
@@ -33,10 +33,10 @@ public class Tests
         var savedData = importService.MapFile(new List<string>() {csvData}, false);
 
         var context = new InMemoryContext();
-        var bankingService = new BankingService(context);
-        bankingService.SaveBankingData(savedData);
+        var bankingService = new OperationService(context);
+        bankingService.SaveOperations(savedData);
 
-        Assert.That(context.Lines.Count, Is.EqualTo(1));
+        Assert.That(context.Operations.Count, Is.EqualTo(1));
     }
     
     [Test]
@@ -46,10 +46,10 @@ public class Tests
         var importService = new ImportService();
         var fileData = File.ReadLines("./files/multiple_lines.txt").ToList();
         var savedData = importService.MapFile(fileData);
-        var bankingService = new BankingService(context);
-        bankingService.SaveBankingData(savedData);
+        var bankingService = new OperationService(context);
+        bankingService.SaveOperations(savedData);
 
-        Assert.That(context.Lines.Count, Is.EqualTo(5));
+        Assert.That(context.Operations.Count, Is.EqualTo(5));
     }
     
     [Test]
@@ -59,8 +59,8 @@ public class Tests
         var importService = new ImportService();
         var fileData = File.ReadLines("./files/multiple_lines.txt").ToList();
         var savedData = importService.MapFile(fileData);
-        var bankingService = new BankingService(context);
-        bankingService.SaveBankingData(savedData);
+        var bankingService = new OperationService(context);
+        bankingService.SaveOperations(savedData);
 
         Assert.IsTrue(File.Exists("./accounts.json"));
         // Assert.AreEqual(5, context.Lines.Count);

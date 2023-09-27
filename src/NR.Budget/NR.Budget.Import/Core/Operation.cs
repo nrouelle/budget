@@ -1,4 +1,4 @@
-﻿public class BudgetLine : IEquatable<BudgetLine>
+﻿public class Operation : IEquatable<Operation>
 {
     public DateTime DateOperation { get; private set; }
     public string Description { get; private set; }
@@ -6,7 +6,7 @@
     public Categorie Categorie { get; private set; }
     public SousCategorie SousCategorie { get; private set; }
 
-    public BudgetLine(DateTime dateOperation, string description, decimal amount)
+    public Operation(DateTime dateOperation, string description, decimal amount)
     {
         DateOperation = dateOperation;
         Description = description;
@@ -20,10 +20,10 @@
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
         if (obj.GetType() != this.GetType()) return false;
-        return Equals((BudgetLine)obj);
+        return Equals((Operation)obj);
     }
 
-    public bool Equals(BudgetLine? other)
+    public bool Equals(Operation? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;

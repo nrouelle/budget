@@ -4,8 +4,8 @@ namespace NR.Budget.Import.Data;
 
 public class JsonContext : IDataContext
 {
-    public List<BudgetLine> Lines { get; set; } = new List<BudgetLine>();
-    public void Save(List<BudgetLine> lines)
+    public List<Operation> Operations { get; set; } = new List<Operation>();
+    public void Save(List<Operation> lines)
     {
         string path = "./accounts.json";
         string json = JsonSerializer.Serialize(lines);

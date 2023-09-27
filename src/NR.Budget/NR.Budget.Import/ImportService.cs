@@ -2,29 +2,29 @@
 
 public class ImportService
 {
-    public List<BudgetLine> MapFile(List<string> csvDatas, bool headers = true)
+    public List<Operation> MapFile(List<string> csvLines, bool headers = true)
     {
         // Remove headers
         if(headers)
-            csvDatas.RemoveAt(0);
+            csvLines.RemoveAt(0);
 
-        var list = new List<BudgetLine>();
+        var operations = new List<Operation>();
         
-        foreach (var data in csvDatas)
+        foreach (var line in csvLines)
         {
-            list.Add(ParseCsvLine(data));
+            operations.Add(ParseOperation(line));
         }
 
-        return list;
+        return operations;
     }
 
-    private BudgetLine ParseCsvLine(string line)
+    private Operation ParseOperation(string line)
     {
-        var parsedLine = line.Split(';');
-        var budgetData = new BudgetLine(
-            DateTime.Parse(parsedLine[0]), 
-            parsedLine[2].Replace('"',' ').Trim(), 
-            decimal.Parse(parsedLine[5]));
-        return budgetData;
+        var parsedOperation = line.Split(';');
+        var operation = new Operation(
+            DateTime.Parse(parsedOperation[0]), 
+            parsedOperation[2].Replace('"',' ').Trim(), 
+            decimal.Parse(parsedOperation[5]));
+        return operation;
     }
 }
