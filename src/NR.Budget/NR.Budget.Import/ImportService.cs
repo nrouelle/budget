@@ -32,10 +32,12 @@ public class ImportService
 
     private string CleanDescription(string description)
     {
-        string cartePattern = @"CARTE \d{2}\/\d{2}\/\d{2} ";
-        string cbPattern = @" CB\*\d{4}";
+        const string cartePattern = @"CARTE \d{2}\/\d{2}\/\d{2} ";
+        const string cbPattern = @" CB\*\d{4}";
+        const string virementSepaPattern = @"VIR SEPA ";
         description = Regex.Replace(description, cartePattern, string.Empty);
         description = Regex.Replace(description, cbPattern, string.Empty);
+        description = Regex.Replace(description, virementSepaPattern, string.Empty);
         return description.Replace('"',' ').Trim();
     }
 }

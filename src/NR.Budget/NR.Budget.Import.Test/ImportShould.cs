@@ -23,7 +23,7 @@ public class Tests
 
         var expectedData = new Operation(
             new DateTime(2023, 9, 22), 
-            "CARTE 21/09/23 RESEAU MISTRAL CB*7767", 
+            "RESEAU MISTRAL", 
             -10.0m);
         Assert.That(savedData.First(), Is.EqualTo(expectedData));
     }
