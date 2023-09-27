@@ -5,10 +5,10 @@ namespace NR.Budget.Import.Data;
 public class JsonContext : IDataContext
 {
     public List<Operation> Operations { get; set; } = new List<Operation>();
-    public void Save(List<Operation> lines)
+    public void SaveChanges()
     {
         string path = "./accounts.json";
-        string json = JsonSerializer.Serialize(lines);
+        string json = JsonSerializer.Serialize(Operations);
         
         File.WriteAllText(path, json);
     }

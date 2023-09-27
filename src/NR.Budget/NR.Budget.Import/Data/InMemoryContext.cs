@@ -3,8 +3,6 @@
 public class InMemoryContext : IDataContext
 {
     public List<Operation> Operations { get; set; } = new List<Operation>();
-    public void Save(List<Operation> lines)
-    {
-        
-    }
+    public void SaveChanges()
+    { }
 }

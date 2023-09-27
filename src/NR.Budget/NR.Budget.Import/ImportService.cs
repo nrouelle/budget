@@ -1,4 +1,6 @@
-﻿namespace NR.Budget.Import;
+﻿using System.Text.RegularExpressions;
+
+namespace NR.Budget.Import;
 
 public class ImportService
 {
@@ -23,8 +25,17 @@ public class ImportService
         var parsedOperation = line.Split(';');
         var operation = new Operation(
             DateTime.Parse(parsedOperation[0]), 
-            parsedOperation[2].Replace('"',' ').Trim(), 
+            CleanDescription(parsedOperation[2]), 
             decimal.Parse(parsedOperation[5]));
         return operation;
+    }
+
+    private string CleanDescription(string description)
+    {
+        string cartePattern = @"CARTE \d{2}\/\d{2}\/\d{2} ";
+        string cbPattern = @" CB\*\d{4}";
+        description = Regex.Replace(description, cartePattern, string.Empty);
+        description = Regex.Replace(description, cbPattern, string.Empty);
+        return description.Replace('"',' ').Trim();
     }
 }

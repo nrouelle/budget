@@ -1,18 +1,18 @@
-﻿public class OperationService
+﻿using NR.Budget.Import.Port.Output;
+using NR.Budget.Import.Port.UseCase;
+
+namespace NR.Budget.Import;
+
+public class OperationService : IImportOperations
 {
-    private readonly IDataContext _context;
-    public OperationService(IDataContext context)
+    private readonly ISaveOperationsPort _saveOperationsPort;
+    
+    public OperationService(ISaveOperationsPort saveOperationsPort)
     {
-        _context = context;
+        _saveOperationsPort = saveOperationsPort;
     }
-    public bool SaveOperations(List<Operation> budgetDatas)
+    public IEnumerable<Operation> ImportOperations(List<Operation> operations)
     {
-        foreach (var data in budgetDatas)
-        {
-            var operation = new Operation(data.DateOperation.Date, data.Description, data.Amount);
-            _context.Operations.Add(operation);
-        }
-        _context.Save(_context.Operations);
-        return true;
+        return _saveOperationsPort.Save(operations);
     }
 }
