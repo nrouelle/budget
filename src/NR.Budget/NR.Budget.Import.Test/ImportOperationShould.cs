@@ -1,7 +1,6 @@
 using NR.Budget.Import.Domain.Entities;
 using NR.Budget.Import.Domain.Services;
 using NR.Budget.Import.Infrastructure;
-using NUnit.Framework.Constraints;
 
 namespace NR.Budget.Import.Test;
 
@@ -39,7 +38,7 @@ public class Tests
 
         var context = new InMemoryContext();
         var operationRepository = new OperationPersistenceAdapter(context);
-        var operationService = new OperationService(operationRepository);
+        var operationService = new OperationService(operationRepository, operationRepository);
         operationService.ImportOperations(importedData);
 
         Assert.That(context.Operations.Count, Is.EqualTo(1));
@@ -54,7 +53,7 @@ public class Tests
         var savedData = importService.MapFile(fileData);
         
         var operationRepository = new OperationPersistenceAdapter(context);
-        var operationService = new OperationService(operationRepository);
+        var operationService = new OperationService(operationRepository,operationRepository);
         operationService.ImportOperations(savedData);
 
         Assert.That(context.Operations.Count, Is.EqualTo(5));
@@ -69,7 +68,7 @@ public class Tests
         var savedData = importService.MapFile(fileData);
         
         var operationRepository = new OperationPersistenceAdapter(context);
-        var operationService = new OperationService(operationRepository);
+        var operationService = new OperationService(operationRepository,operationRepository);
         operationService.ImportOperations(savedData);
 
         Assert.IsTrue(File.Exists("./accounts.json"));
@@ -85,7 +84,7 @@ public class Tests
         
         var context = new InMemoryContext();
         var operationRepository = new OperationPersistenceAdapter(context);
-        var operationService = new OperationService(operationRepository);
+        var operationService = new OperationService(operationRepository,operationRepository);
         
         var operationsImported = operationService.ImportOperations(operations).ToList();
 

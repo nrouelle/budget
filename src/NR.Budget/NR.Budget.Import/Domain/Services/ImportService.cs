@@ -25,11 +25,11 @@ public class ImportService
     {
         var parsedOperation = line.Split(';');
         var operationDate = DateTime.Parse(parsedOperation[0]);
-        var amount = Math.Abs(float.Parse(parsedOperation[5]));
+        var amount = float.Parse(parsedOperation[5]);
         return amount switch
         {
-            > 0 => new Revenu(operationDate, CleanDescription(parsedOperation[2]), amount),
-            < 0 => new Depense(operationDate, CleanDescription(parsedOperation[2]), amount),
+            > 0 => new Revenu(operationDate, CleanDescription(parsedOperation[2]), Math.Abs(amount)),
+            < 0 => new Depense(operationDate, CleanDescription(parsedOperation[2]), Math.Abs(amount)),
             _ => null
         };
     }

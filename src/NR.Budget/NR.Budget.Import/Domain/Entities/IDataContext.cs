@@ -2,6 +2,7 @@
 
 public interface IDataContext
 {
-    List<Operation?> Operations { get; set; }
+    List<Operation> Operations { get; set; }
+
     void SaveChanges();
 }

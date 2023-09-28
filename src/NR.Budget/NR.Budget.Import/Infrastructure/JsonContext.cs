@@ -6,6 +6,7 @@ namespace NR.Budget.Import.Infrastructure;
 public class JsonContext : IDataContext
 {
     public List<Operation?> Operations { get; set; } = new List<Operation?>();
+
     public void SaveChanges()
     {
         string path = "./accounts.json";
