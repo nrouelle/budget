@@ -27,4 +27,20 @@ public class OperationPersistenceAdapter : ISaveOperationsPort, IGetOperationsPo
 
         return operations;
     }
+
+    public IEnumerable<Revenu> RevenuesFromMonth(int year, int month)
+    {
+        var lastDayOfMonth = new DateTime(year, month + 1, 1).AddDays(-1).Day;
+        var operations = _dataContext.Operations.OfType<Revenu>().Where(op =>
+            op.DateOperation > new DateTime(year, month, 1) && op.DateOperation < new DateTime(year, month, lastDayOfMonth));
+
+        return operations;
+    }
+
+    public float GetSavings(int year, int month)
+    {
+        var revenues = RevenuesFromMonth(year, month).Sum(r => r.Amount);
+        var expenses = ExpensesFromMonth(year, month).Sum(r => r.Amount);
+        return revenues - expenses;
+    }
 }

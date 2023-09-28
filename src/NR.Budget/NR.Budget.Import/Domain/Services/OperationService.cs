@@ -19,8 +19,18 @@ public class OperationService : IImportOperations
         return _saveOperationsPort.Save(operations);
     }
 
-    public IEnumerable<Operation> GetOperations(int year, int month)
+    public IEnumerable<Depense> GetDepenses(int year, int month)
     {
         return _getOperationsPort.ExpensesFromMonth(year, month);
+    }
+
+    public IEnumerable<Revenu> GetRevenues(int year, int month)
+    {
+        return _getOperationsPort.RevenuesFromMonth(year, month);
+    }
+
+    public float GetSavings(int year, int month)
+    {
+        return _getOperationsPort.GetSavings(year, month);
     }
 }

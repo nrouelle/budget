@@ -3,10 +3,10 @@ using NR.Budget.Import.Infrastructure;
 
 namespace NR.Budget.Import.Test;
 
-public class GetExpenseShould
+public class GetSavedAmountShould
 {
     [Test]
-    public void ReturnExpenseForAGivenMonth()
+    public void ReturnSavingsForAGivenMonth()
     {
         var expenseMonthFile = "./files/expense_month.txt";
         var context = new InMemoryContext();
@@ -18,7 +18,8 @@ public class GetExpenseShould
         var operationService = new OperationService(operationRepository, operationRepository);
         operationService.ImportOperations(savedData);
 
-        var expensesSeptembre = operationService.GetDepenses(2023, 9).ToList();
-        Assert.That(expensesSeptembre.Count(), Is.EqualTo(2));
+        var revenuesSeptember = operationService.GetRevenues(2023, 9).ToList();
+        var expensesSeptember = operationService.GetSavings(2023, 9);
+        Assert.IsTrue(operationService.GetSavings(2023, 9).IsEqualTo(-0.48f));
     }
 }
